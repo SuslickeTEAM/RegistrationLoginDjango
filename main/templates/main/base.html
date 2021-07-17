@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <div class="header">
+        <h1>header</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="{% url 'main' %}">Главная</a>
+                </li>
+            {% if not request.user.is_authenticated %}
+                <li>
+                    <a href="{% url 'login' %}">Авторизация</a>
+                </li>
+                <li>
+                    <a href="{% url 'registration' %}">Регистрация</a>
+                </li>
+
+            {% endif %}
+                <li>
+                    {% if request.user.is_authenticated %}<span>Здравствуйте, <span><a href="#"; style="font-size: 10px; color: black;">{{ request.user.username }}</a><a
+                            href="{% url 'logout' %}">Выйти</a></span></span>{% endif %}
+                </li>
+            </ul>
+        </nav>
+    </div>
+    {% block content %}{% endblock %}
+    <div class="footer">
+        <h1>footer</h1>
+    </div>
+</body>
+</html>
